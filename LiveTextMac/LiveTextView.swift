@@ -34,6 +34,13 @@ struct LiveTextView: NSViewRepresentable {
                 let configuration = ImageAnalyzer.Configuration([.text])
                 let analysis = try await analyzer.analyze(image, orientation: .up, configuration: configuration)
                 overlayView.analysis = analysis
+                overlayView.selectableItemsHighlighted = true
+                overlayView.setSupplementaryInterfaceHidden(true, animated: false)
+                let text = overlayView.text
+                overlayView.selectedRanges = [text.startIndex..<text.index(text.startIndex, offsetBy: 20)]
+                print(overlayView.text)
+                print(overlayView.selectedText)
+                print(overlayView.selectedRanges)
             } catch {
                 print(error.localizedDescription)
             }
